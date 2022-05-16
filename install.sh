@@ -7,6 +7,5 @@ fi
 rm -rv build
 mkdir -p build
 cd build || exit
-cmake ..
-make
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make install

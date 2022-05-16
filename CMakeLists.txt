@@ -13,7 +13,7 @@ add_library(${PROJECT_NAME} src/SvrDir.cpp include/SvrDir.h
         src/NotificationsAPI.cpp include/NotificationsAPI.h
         src/ParameterBuilder.cpp include/ParameterBuilder.h)
 
-target_link_libraries(${PROJECT_NAME} my_utils curlpp curl)
+target_link_libraries(${PROJECT_NAME} log_helper spdlog my_utils curlpp curl)
 
 #   INSTALL
 if (UNIX AND NOT APPLE)
@@ -21,3 +21,10 @@ if (UNIX AND NOT APPLE)
     install(TARGETS ${PROJECT_NAME})
     install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 endif ()
+
+if (EXISTS /etc/redhat-release)
+    add_definitions(-DREDHAT)
+elseif (EXISTS /etc/debian_version)
+    add_definitions(-DDEBIAN)
+endif ()
+

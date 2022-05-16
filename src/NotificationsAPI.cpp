@@ -2,23 +2,27 @@
 // Created by dawid on 22.04.22.
 //
 
+#ifdef REDHAT
+#include <json/writer.h>
+#endif
+#ifdef DEBIAN
+#include <jsoncpp/json/writer.h>
+#endif
 
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 
-#include <jsoncpp/json/writer.h>
 #include <log_helper/Log.h>
 
 #include "../include/ParameterBuilder.h"
 #include "../include/NotificationsAPI.h"
 
 namespace mps {
-    Json::FastWriter writer;
 
     bool NotificationsAPI::connect(const std::string &service) {
         Json::Value request;
         request["service"] = service;
-        std::string params = writer.write(request);
+        std::string params = Json::FastWriter().write(request);
         params.pop_back();
         return !post("/connect", params).empty();
     }
@@ -26,7 +30,7 @@ namespace mps {
     bool NotificationsAPI::disconnect(const std::string &service) {
         Json::Value request;
         request["service"] = service;
-        std::string params = writer.write(request);
+        std::string params = Json::FastWriter().write(request);
         params.pop_back();
         return !post("/disconnect", params).empty();
     }
@@ -37,7 +41,7 @@ namespace mps {
         request["service"] = service;
         request["title"] = title;
         request["body"] = body;
-        return post("/notify_clients", writer.write(request));
+        return post("/notify_clients", Json::FastWriter().write(request));
     }
 
     std::string NotificationsAPI::services(int client_id) {
@@ -52,7 +56,7 @@ namespace mps {
         jv["client_id"] = client_id;
         jv["service"] = service;
         jv["firebase_token"] = firebase_token;
-        std::string params = writer.write(jv);
+        std::string params = Json::FastWriter().write(jv);
         params.pop_back();
         return post("/service_on", params);
     }
@@ -61,7 +65,7 @@ namespace mps {
         Json::Value jv;
         jv["client_id"] = client_id;
         jv["service"] = service;
-        std::string params = writer.write(jv);
+        std::string params = Json::FastWriter().write(jv);
         params.pop_back();
         return post("/service_off", params);
     }
@@ -69,7 +73,7 @@ namespace mps {
     std::string NotificationsAPI::services_off(int client_id) {
         Json::Value jv;
         jv["client_id"] = client_id;
-        std::string params = writer.write(jv);
+        std::string params = Json::FastWriter().write(jv);
         params.pop_back();
         return post("/services_off", params);
     }
@@ -79,7 +83,7 @@ namespace mps {
         Json::Value jv;
         jv["client_id"] = client_id;
         jv["firebase_token"] = firebase_token;
-        std::string params = writer.write(jv);
+        std::string params = Json::FastWriter().write(jv);
         params.pop_back();
         return post("/update_firebase_token", params);
     }
