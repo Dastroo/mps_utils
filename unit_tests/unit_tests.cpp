@@ -3,7 +3,7 @@
 //
 
 #include "doctest.h"
-#include <mps_utils/NotificationsAPI.h>
+#include "../include/NotificationsAPI.h"
 
 TEST_CASE(R"(test)") {
     mps::NotificationsAPI notificationsApi;

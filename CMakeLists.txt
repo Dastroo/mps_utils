@@ -13,7 +13,7 @@ add_library(${PROJECT_NAME} src/SvrDir.cpp include/SvrDir.h
         src/NotificationsAPI.cpp include/NotificationsAPI.h
         src/ParameterBuilder.cpp include/ParameterBuilder.h)
 
-target_link_libraries(${PROJECT_NAME} log_helper spdlog my_utils curlpp curl)
+target_link_libraries(${PROJECT_NAME} log_helper spdlog my_utils jsoncpp curlpp curl)
 
 #   INSTALL
 if (UNIX AND NOT APPLE)
