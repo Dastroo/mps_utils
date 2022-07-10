@@ -9,9 +9,11 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
 enable_testing()
 add_subdirectory(unit_tests)
 
-add_library(${PROJECT_NAME} src/SvrDir.cpp include/SvrDir.h
+add_library(${PROJECT_NAME} src/Filesystem.cpp include/Filesystem.h
         src/NotificationsAPI.cpp include/NotificationsAPI.h
-        src/ParameterBuilder.cpp include/ParameterBuilder.h)
+        src/ParameterBuilder.cpp include/ParameterBuilder.h
+        src/Crypto.cpp include/Crypto.h
+        src/Sha256.cpp include/Sha256.h)
 
 target_link_libraries(${PROJECT_NAME} log_helper spdlog my_utils jsoncpp curlpp curl)
 
