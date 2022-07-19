@@ -13,7 +13,8 @@ add_library(${PROJECT_NAME} src/Filesystem.cpp include/Filesystem.h
         src/NotificationsAPI.cpp include/NotificationsAPI.h
         src/ParameterBuilder.cpp include/ParameterBuilder.h
         src/Crypto.cpp include/Crypto.h
-        src/Sha256.cpp include/Sha256.h)
+        src/Sha256.cpp include/Sha256.h
+        include/UserFlags.h)
 
 target_link_libraries(${PROJECT_NAME} log_helper spdlog my_utils jsoncpp curlpp curl)
 
